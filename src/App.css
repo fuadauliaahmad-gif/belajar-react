@@ -1,0 +1,536 @@
+.page {
+  width: min(100% - 48px, 960px);
+  margin: 0 auto;
+  padding: 88px 0 32px;
+}
+
+.page-header {
+  max-width: 620px;
+  margin: 0 auto 48px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #64746a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+}
+
+.eyebrow span {
+  color: #e58b64;
+  font-size: 17px;
+}
+
+.page-header h1 {
+  margin: 18px 0 14px;
+  color: #23332b;
+  font-size: clamp(42px, 7vw, 68px);
+  font-weight: 750;
+  letter-spacing: -3.8px;
+  line-height: 1.02;
+}
+
+.page-header h1 span {
+  color: #6d8d78;
+}
+
+.page-header > p {
+  color: #718078;
+  font-size: 16px;
+}
+
+.profiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.profile-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 276px;
+  padding: 26px;
+  border: 1px solid rgba(47, 67, 55, 0.08);
+  border-radius: 24px;
+  text-align: left;
+  box-shadow: 0 12px 30px rgba(37, 56, 44, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px rgba(37, 56, 44, 0.1);
+}
+
+.profile-card--mint {
+  background: #e8f1e8;
+}
+
+.profile-card--peach {
+  background: #faeae0;
+}
+
+.profile-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-card__label {
+  color: #758477;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.profile-card__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #91aa91;
+  box-shadow: 0 0 0 5px rgba(145, 170, 145, 0.16);
+}
+
+.profile-card--peach .profile-card__dot {
+  background: #df9b76;
+  box-shadow: 0 0 0 5px rgba(223, 155, 118, 0.16);
+}
+
+.profile-card__avatar {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  margin: 28px 0 16px;
+  place-items: center;
+  border: 1px solid rgba(47, 67, 55, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.62);
+  color: #53705a;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.profile-card--peach .profile-card__avatar {
+  color: #a76e4e;
+}
+
+.profile-card h2 {
+  margin: 0 0 5px;
+  color: #2b3a31;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+.profile-card__caption {
+  margin-bottom: 12px;
+  color: #758078;
+  font-size: 14px;
+}
+
+.profile-card__hobby {
+  display: inline-flex;
+  padding: 6px 12px;
+  border: 1px solid rgba(47, 67, 55, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.58);
+  color: #4a6551;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.profile-card--peach .profile-card__hobby {
+  color: #986345;
+}
+
+.page-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 56px;
+  color: #849087;
+  font-size: 13px;
+}
+
+.footer-mark {
+  color: #d78c68;
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .page {
+    width: min(100% - 36px, 420px);
+    padding-top: 64px;
+  }
+
+  .page-header {
+    margin-bottom: 32px;
+  }
+
+  .page-header h1 {
+    letter-spacing: -2.5px;
+  }
+
+  .profiles {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .profile-card {
+    min-height: 250px;
+    padding: 22px;
+  }
+
+  .page-footer {
+    margin-top: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-card {
+    transition: none;
+  }
+}
+
+.profil-container {
+  max-width: 500px;
+  margin: 100px auto 40px;
+  padding: 24px;
+  background-color: rgb(43, 42, 42);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.judul-profil {
+  text-align: center;
+  color: #dc2626;
+}
+
+.judul.hobi {
+  margin-top: 28px;
+  color: #334155;
+}
+
+.daftar-hobi {
+  padding-left: 24px;
+}
+
+.daftar-hobi li {
+  margin-bottom: 10px;
+}
+
+.form-nama {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.input-nama {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.input-nama:focus {
+  outline: 2px solid #93c5fd;
+  border-color: #2563eb;
+}
+
+.tombol-hapus {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #dc2626;
+  color: white;
+  cursor: pointer;
+  transition: backround-color 0.2s ease;
+}
+
+.tombol-hapus:hover {
+  background-color: #b91c1c;
+}
+
+.pesan-sapaan {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.pesan-sapaan.aktif {
+  background-color: #dcfce7;
+  color: #166534;
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .profil-container {
+    margin: 20px 12px;
+    padding: 16px;
+  }
+
+  .form-nama {
+    flex-direction: column;
+  }
+
+  .input-nama,
+  .tombol-hapus {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+    .daftar-hobi li {
+    transition:
+      transform 0.3s ease,
+      color 0.9s ease;
+}
+
+    .daftar-hobi li:hover {
+      transform: translateX(6px);
+      color: #dc2626;
+      cursor: pointer;
+}
+
+.item-hobi {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease;
+    color: 0.2s ease;
+    background-color: 0.2s ease;
+}
+
+.item-hobi:hover {
+  transform: translateX(6px) scale(1.02);
+  color: #dc2626;
+  background-color: #0f0f0f;
+}
+
+.item-hobi.terpilih {
+  background-color: #7f1d1d;
+  color: white;
+  box-shadow:
+    0 0 5px #ef4444,
+    0 0 15px rgba(220, 38, 38, 0.7),
+    0 0 25px rgba(220, 38, 38, 0.4);
+
+  transform: scale(1.03);
+  animation: pilihKarakter 0.35s ease;
+}
+
+.info-hobi {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background-color: #7b6464;
+
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.2);
+  transition: box-shadow 0.3s ease;
+
+  animation: munculPanel 0.4s ease;
+}
+
+.info-hobi h3 {
+  margin-top: 0;
+  color: #dcd9d9;
+}
+
+.info-hobi p {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #7f1d1d;
+}
+
+.info-hobi span {
+  color: #b91c1c;
+  font-size: 14px;
+}
+
+.ikon-hobi {
+  font-size: 40px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.ikon-item {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+@keyframes pilihKarakter {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes munculPanel {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.item-hobi.terpilih .ikon-item {
+  display: inline-block;
+  animation: pulselkon 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px #f87171);
+}
+
+@keyframes pulselkon {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+@keyframes detakJantung {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.3);
+  }
+
+  30% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.2);
+  }
+
+  60% {
+    transform: scale(1);
+  }
+}
+
+.item-hobi.hiburan.terpilih .ikon-item {
+  animation: glitchGame 0.5s ease-in-out infinite;
+}
+
+@keyframes glitchGame {
+  0%, 100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-3px);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+.item-hobi.bisnis.terpilih .ikon-item {
+  animation: bounceBisnis 0.7s ease-in-out infinite;
+}
+
+@keyframes bounceBisnis {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.item-hobi.teknologi.terpilih .ikon-item {
+  animation: pulseCoding 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 7px #60a5fa);
+}
+
+@keyframes pulseCoding {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px #60a5fa);
+  }
+
+  50% {
+    transform: scale(1.25);
+    filter: drop-shadow(0 0 12px #60a5fa);
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8%;
+  background-color: #171717;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 84%;
+  z-index: 1000;
+}
+
+
+.navbar-logo {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu a {
+  color: #d4d4d4;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.navbar-menu a:hover {
+  color: #ef4444;
+}
