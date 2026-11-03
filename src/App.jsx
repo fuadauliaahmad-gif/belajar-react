@@ -1,5 +1,8 @@
-
 import { useState, useEffect } from "react";
+import { Routes, Route, NavLink } from "react-router";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import "./App.css";
 
 function HobiItem({
@@ -24,15 +27,14 @@ function HobiItem({
 function Navbar() {
   return (
     <nav className="navbar">
-      <a href="#home" className="navbar-logo">
+      <NavLink to="/" className="navbar-logo">
         FUAD-DEV.ID
-      </a>
+      </NavLink>
 
       <ul className="navbar-menu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/about">About</NavLink></li>
+        <li><NavLink to="/contact">Contact</NavLink></li>
       </ul>
     </nav>
   );
@@ -81,70 +83,80 @@ function App() {
     document.title = nama ? `Profil ${nama}` : "Profil Saya";
   }, [nama]);
 
-  return (
-    <>
-      <Navbar />
+return (
+  <>
+    <Navbar />
 
-      <div className="profil-container" id="home">
-        <h1 className="judul-profil">Profil Saya</h1>
-        <h2 className="judul-hobi">Daftar Hobi Saya</h2>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="profil-container" id="home">
+            <h1 className="judul-profil">Profil Saya</h1>
+            <h2 className="judul-hobi">Daftar Hobi Saya</h2>
 
-        <ul className="daftar-hobi">
-          {hobi.map((item) => (
-            <HobiItem
-              key={item.id}
-              id={item.id}
-              nama={item.nama}
-              kategori={item.kategori}
-              ikon={item.ikon}
-              terpilih={hobiTerpilih === item.id}
-              onPilih={() => setHobiTerpilih(item.id)}
-            />
-          ))}
-        </ul>
+            <ul className="daftar-hobi">
+              {hobi.map((item) => (
+                <HobiItem
+                  key={item.id}
+                  id={item.id}
+                  nama={item.nama}
+                  kategori={item.kategori}
+                  ikon={item.ikon}
+                  terpilih={hobiTerpilih === item.id}
+                  onPilih={() => setHobiTerpilih(item.id)}
+                />
+              ))}
+            </ul>
 
-        <div className="info-hobi">
-          {hobiAktif ? (
-            <>
-              <div className="ikon-hobi">
-                {hobiAktif.ikon}
-              </div>
+            <div className="info-hobi">
+              {hobiAktif ? (
+                <>
+                  <div className="ikon-hobi">
+                    {hobiAktif.ikon}
+                  </div>
 
-              <h3>Hobi Terpilih</h3>
-              <p>{hobiAktif.nama}</p>
-              <p>{hobiAktif.deskripsi}</p>
-              <span>Kategori: {hobiAktif.kategori}</span>
-            </>
-          ) : (
-            <p>Belum ada hobi yang dipilih.</p>
-          )}
-        </div>
+                  <h3>Hobi Terpilih</h3>
+                  <p>{hobiAktif.nama}</p>
+                  <p>{hobiAktif.deskripsi}</p>
+                  <span>Kategori: {hobiAktif.kategori}</span>
+                </>
+              ) : (
+                <p>Belum ada hobi yang dipilih.</p>
+              )}
+            </div>
 
-        <div className="form-nama">
-          <input
-            className="input-nama"
-            type="text"
-            placeholder="Masukkan nama kamu"
-            value={nama}
-            onChange={(event) => setNama(event.target.value)}
-          />
+            <div className="form-nama">
+              <input
+                className="input-nama"
+                type="text"
+                placeholder="Masukkan nama kamu"
+                value={nama}
+                onChange={(event) => setNama(event.target.value)}
+              />
 
-          <button
-            className="tombol-hapus"
-            onClick={() => setNama("")}
-          >
-            Hapus Nama
-          </button>
-        </div>
+              <button
+                className="tombol-hapus"
+                onClick={() => setNama("")}
+              >
+                Hapus Nama
+              </button>
+            </div>
 
-        <p className={`pesan-sapaan ${nama ? "aktif" : ""}`}>
-          {nama
-            ? `Halo, ${nama}!`
-            : "Silakan masukkan nama kamu."}
-        </p>
-      </div>
-    </>
-  );
+            <p className={`pesan-sapaan ${nama ? "aktif" : ""}`}>
+              {nama
+                ? `Halo, ${nama}!`
+                : "Silakan masukkan nama kamu."}
+            </p>
+          </div>
+        }
+      />
+
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+    </Routes>
+  </>
+);
 }
 
 export default App;
