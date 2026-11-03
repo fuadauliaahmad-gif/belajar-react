@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, NavLink } from "react-router";
+import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
