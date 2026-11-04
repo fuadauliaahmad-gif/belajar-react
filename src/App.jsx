@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, NavLink } from "react-router";
+import { Routes, Route, NavLink, Navigate } from "react-router";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./pages/login";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Profile from "./pages/dashboard/Profile";
+import Setting from "./pages/dashboard/Setting";
 import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -44,6 +49,7 @@ function Navbar() {
 function App() {
   const [hobiTerpilih, setHobiTerpilih] = useState(null);
   const [nama, setNama] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const hobi = [
     {
@@ -84,80 +90,87 @@ function App() {
     document.title = nama ? `Profil ${nama}` : "Profil Saya";
   }, [nama]);
 
-return (
-  <>
-    <Navbar />
+  return (
+    <>
+      <Navbar />
 
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="profil-container" id="home">
-            <h1 className="judul-profil">Profil Saya</h1>
-            <h2 className="judul-hobi">Daftar Hobi Saya</h2>
+      <Routes>
+        <Route path="/produk/:id" element={<ProductDetail />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard-old"
+          element={<Navigate to="/dashboard" replace />}
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="profile" element={<Profile />} />
+          <Route path="setting" element={<Setting />} />
+        </Route>
+        <Route
+          path="/"
+          element={
+            <div className="profil-container" id="home">
+              <h1 className="judul-profil">Profil Saya</h1>
+              <h2 className="judul-hobi">Daftar Hobi Saya</h2>
 
-            <ul className="daftar-hobi">
-              {hobi.map((item) => (
-                <HobiItem
-                  key={item.id}
-                  id={item.id}
-                  nama={item.nama}
-                  kategori={item.kategori}
-                  ikon={item.ikon}
-                  terpilih={hobiTerpilih === item.id}
-                  onPilih={() => setHobiTerpilih(item.id)}
+              <ul className="daftar-hobi">
+                {hobi.map((item) => (
+                  <HobiItem
+                    key={item.id}
+                    id={item.id}
+                    nama={item.nama}
+                    kategori={item.kategori}
+                    ikon={item.ikon}
+                    terpilih={hobiTerpilih === item.id}
+                    onPilih={() => setHobiTerpilih(item.id)}
+                  />
+                ))}
+              </ul>
+
+              <div className="info-hobi">
+                {hobiAktif ? (
+                  <>
+                    <div className="ikon-hobi">{hobiAktif.ikon}</div>
+                    <h3>Hobi Terpilih</h3>
+                    <p>{hobiAktif.nama}</p>
+                    <p>{hobiAktif.deskripsi}</p>
+                    <span>Kategori: {hobiAktif.kategori}</span>
+                  </>
+                ) : (
+                  <p>Belum ada hobi yang dipilih.</p>
+                )}
+              </div>
+
+              <div className="form-nama">
+                <input
+                  className="input-nama"
+                  type="text"
+                  placeholder="Masukkan nama kamu"
+                  value={nama}
+                  onChange={(event) => setNama(event.target.value)}
                 />
-              ))}
-            </ul>
+                <button className="tombol-hapus" onClick={() => setNama("")}>
+                  Hapus Nama
+                </button>
+              </div>
 
-            <div className="info-hobi">
-              {hobiAktif ? (
-                <>
-                  <div className="ikon-hobi">
-                    {hobiAktif.ikon}
-                  </div>
-
-                  <h3>Hobi Terpilih</h3>
-                  <p>{hobiAktif.nama}</p>
-                  <p>{hobiAktif.deskripsi}</p>
-                  <span>Kategori: {hobiAktif.kategori}</span>
-                </>
-              ) : (
-                <p>Belum ada hobi yang dipilih.</p>
-              )}
+              <p className={`pesan-sapaan ${nama ? "aktif" : ""}`}>
+                {nama ? `Halo, ${nama}!` : "Silakan masukkan nama kamu."}
+              </p>
             </div>
-
-            <div className="form-nama">
-              <input
-                className="input-nama"
-                type="text"
-                placeholder="Masukkan nama kamu"
-                value={nama}
-                onChange={(event) => setNama(event.target.value)}
-              />
-
-              <button
-                className="tombol-hapus"
-                onClick={() => setNama("")}
-              >
-                Hapus Nama
-              </button>
-            </div>
-
-            <p className={`pesan-sapaan ${nama ? "aktif" : ""}`}>
-              {nama
-                ? `Halo, ${nama}!`
-                : "Silakan masukkan nama kamu."}
-            </p>
-          </div>
-        }
-      />
-
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
-  </>
-);
+          }
+        />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
