@@ -1,10 +1,17 @@
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 
-function Dashboard() {
+function Dashboard({ onLogut }) {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    onLogut();
+    navigate("/login", { replace: true});
+  }
+
   return (
     <div>
       <h1>Dashboard</h1>
-      <p>Selamat datang di halaman dashboard.</p>
+      <p>Welcome di halaman dashboard</p>
 
       <nav>
         <NavLink to="/dashboard/profile">Profil</NavLink>
@@ -15,6 +22,10 @@ function Dashboard() {
       <hr />
 
       <Outlet />
+
+      <button onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }

@@ -6,7 +6,6 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Profile from "./pages/dashboard/Profile";
 import Setting from "./pages/dashboard/Setting";
 import ProductDetail from "./pages/ProductDetail";
-import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import "./App.css";
@@ -98,7 +97,7 @@ function App() {
         <Route path="/produk/:id" element={<ProductDetail />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
         <Route
           path="/dashboard-old"
           element={<Navigate to="/dashboard" replace />}
@@ -107,7 +106,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Dashboard />
+              <Dashboard onLogut={() => setIsAuthenticated(false)}/>
             </ProtectedRoute>
           }
         >
