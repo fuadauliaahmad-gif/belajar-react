@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, NavLink, Navigate } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
+import HobiItem from "./components/HobiItem";
 import Login from "./pages/login";
+import FormPengguna from "./pages/form/FormPengguna";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Profile from "./pages/dashboard/Profile";
 import Setting from "./pages/dashboard/Setting";
@@ -10,40 +13,6 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import "./App.css";
 
-function HobiItem({
-  id,
-  nama,
-  kategori,
-  ikon,
-  terpilih,
-  onPilih
-}) {
-  return (
-    <li
-      className={`item-hobi ${terpilih ? "terpilih" : ""} ${kategori.toLowerCase()}`}
-      onClick={onPilih}
-    >
-      <span className="ikon-item">{ikon}</span>
-      <strong>{nama}</strong> - {kategori}
-    </li>
-  );
-}
-
-function Navbar() {
-  return (
-    <nav className="navbar">
-      <NavLink to="/" className="navbar-logo">
-        FUAD-DEV.ID
-      </NavLink>
-
-      <ul className="navbar-menu">
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/about">About</NavLink></li>
-        <li><NavLink to="/contact">Contact</NavLink></li>
-      </ul>
-    </nav>
-  );
-}
 
 function App() {
   const [hobiTerpilih, setHobiTerpilih] = useState(null);
@@ -97,6 +66,10 @@ function App() {
         <Route path="/produk/:id" element={<ProductDetail />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/form-pengguna"
+          element={<FormPengguna />}
+        />
         <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
         <Route
           path="/dashboard-old"
@@ -106,7 +79,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Dashboard onLogut={() => setIsAuthenticated(false)}/>
+              <Dashboard onLogout={() => setIsAuthenticated(false)} />
             </ProtectedRoute>
           }
         >
@@ -124,7 +97,6 @@ function App() {
                 {hobi.map((item) => (
                   <HobiItem
                     key={item.id}
-                    id={item.id}
                     nama={item.nama}
                     kategori={item.kategori}
                     ikon={item.ikon}
