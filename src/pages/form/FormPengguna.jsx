@@ -51,70 +51,81 @@ function FormPengguna() {
   }
 
   return (
-    <div>
-      <h1>Form Data Pengguna</h1>
+    <div className="halaman-wrapper">
+      <section className="halaman-header">
+        <span className="badge-kategori">React Hook Form + Zod</span>
+        <h1 className="halaman-judul">Form Data Pengguna</h1>
+        <p className="subjudul-halaman">Contoh form validasi menggunakan React Hook Form dan Zod schema.</p>
+      </section>
 
-      {isSuccess && (
-        <p role="status">
-          Data pengguna berhasil disimpan!
-        </p>
-      )}
+      <div className="kartu-modern" style={{ maxWidth: "520px", margin: "0 auto", padding: "30px" }}>
+        {isSuccess && (
+          <div className="alert-sukses" style={{ marginBottom: "20px" }}>
+            ✅ <strong>Data pengguna berhasil disimpan!</strong>
+          </div>
+        )}
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        onChange={() => setIsSuccess(false)}
-      >
-        <div>
-          <label>Nama Lengkap</label>
-          <input
-            type="text"
-            placeholder="Masukkan nama"
-            {...register("nama")}
-          />
-          {errors.nama && <p>{errors.nama.message}</p>}
-        </div>
-
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="Masukkan email"
-            {...register("email")}
-          />
-          {errors.email && <p>{errors.email.message}</p>}
-        </div>
-
-        <div>
-          <label>Usia</label>
-          <input
-            type="number"
-            placeholder="Masukkan usia"
-            {...register("usia")}
-          />
-          {errors.usia && <p>{errors.usia.message}</p>}
-        </div>
-
-        <div>
-          <label>Alamat</label>
-          <textarea
-            placeholder="Masukkan alamat"
-            {...register("alamat")}
-          />
-          {errors.alamat && <p>{errors.alamat.message}</p>}
-        </div>
-
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Menyimpan..." : "Simpan Data"}
-        </button>
-
-        <button
-          type="button"
-          onClick={handleReset}
-          disabled={isSubmitting}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          onChange={() => setIsSuccess(false)}
+          className="form-kontak"
         >
-          Reset Form
-        </button>
-      </form>
+          <div className="form-group">
+            <label>Nama Lengkap</label>
+            <input
+              type="text"
+              placeholder="Masukkan nama"
+              {...register("nama")}
+            />
+            {errors.nama && <p style={{ color: "#ef4444", fontSize: "13px", margin: "4px 0 0" }}>{errors.nama.message}</p>}
+          </div>
+
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="Masukkan email"
+              {...register("email")}
+            />
+            {errors.email && <p style={{ color: "#ef4444", fontSize: "13px", margin: "4px 0 0" }}>{errors.email.message}</p>}
+          </div>
+
+          <div className="form-group">
+            <label>Usia</label>
+            <input
+              type="number"
+              placeholder="Masukkan usia"
+              {...register("usia")}
+            />
+            {errors.usia && <p style={{ color: "#ef4444", fontSize: "13px", margin: "4px 0 0" }}>{errors.usia.message}</p>}
+          </div>
+
+          <div className="form-group">
+            <label>Alamat</label>
+            <textarea
+              rows="3"
+              placeholder="Masukkan alamat"
+              {...register("alamat")}
+            />
+            {errors.alamat && <p style={{ color: "#ef4444", fontSize: "13px", margin: "4px 0 0" }}>{errors.alamat.message}</p>}
+          </div>
+
+          <div style={{ display: "flex", gap: "12px", marginTop: "8px" }}>
+            <button type="submit" className="tombol-utama" style={{ flex: 1 }} disabled={isSubmitting}>
+              {isSubmitting ? "Menyimpan..." : "Simpan Data"}
+            </button>
+
+            <button
+              type="button"
+              className="tombol-sekunder"
+              onClick={handleReset}
+              disabled={isSubmitting}
+            >
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

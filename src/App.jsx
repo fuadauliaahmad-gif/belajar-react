@@ -1,22 +1,39 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Login from "./pages/login";
-import FormPengguna from "./pages/form/FormPengguna";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Profile from "./pages/dashboard/Profile";
-import Setting from "./pages/dashboard/Setting";
-import ProductDetail from "./pages/ProductDetail";
+import AppRoutes from "./routes/AppRoutes";
 import "./App.css";
 
 function App() {
+  // Ambil status login dari localStorage agar tidak hilang saat di-refresh
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem("is_auth") === "true";
+  });
+
+  // Mengambil data pengguna
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem("auth_user");
+
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        // fallback jika parse json gagal
+      }
+    }
+    return {
+      username: "fuadaulia",
+      namaLengkap: "Fuad Aulia",
+      email: "fuadaulia.dev@gmail.com",
+      role: "Frontend Developer",
+      bio: "Pelajar yang bersemangat mendalami React, JavaScript modern, dan perancangan antarmuka responsif.",
+      lokasi: "Indonesia",
+      avatar: "👨‍💻",
+      tanggalBergabung: "November 2026"
+    };
+  });
+
   const [hobiTerpilih, setHobiTerpilih] = useState(null);
   const [nama, setNama] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const hobi = [
     {
@@ -55,48 +72,54 @@ function App() {
     document.title = nama ? `Profil ${nama}` : "Portofolio Fuad";
   }, [nama]);
 
+  function handleLogin(dataLogin) {
+    setIsAuthenticated(true);
+    localStorage.setItem("is_auth", "true");
+
+    if (dataLogin?.username) {
+      setUser((prev) => {
+        const updated = {
+          ...prev,
+          username: dataLogin.username,
+          namaLengkap: dataLogin.namaLengkap || dataLogin.username,
+          email: dataLogin.email || prev.email
+        };
+        localStorage.setItem("auth_user", JSON.stringify(updated));
+        return updated;
+      });
+    }
+  }
+
+  function handleLogout() {
+    setIsAuthenticated(false);
+    localStorage.removeItem("is_auth");
+  }
+
   return (
     <>
-      <Navbar />
+      {/* Navbar hanya ditampilkan jika pengguna sudah berhasil login */}
+      {isAuthenticated && (
+        <Navbar
+          isAuthenticated={isAuthenticated}
+          onLogout={handleLogout}
+          user={user}
+        />
+      )}
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              hobi={hobi}
-              hobiTerpilih={hobiTerpilih}
-              setHobiTerpilih={setHobiTerpilih}
-              hobiAktif={hobiAktif}
-              nama={nama}
-              setNama={setNama}
-            />
-          }
-        />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/produk/:id" element={<ProductDetail />} />
-        <Route path="/form-pengguna" element={<FormPengguna />} />
-        <Route
-          path="/login"
-          element={<Login onLogin={() => setIsAuthenticated(true)} />}
-        />
-        <Route
-          path="/dashboard-old"
-          element={<Navigate to="/dashboard" replace />}
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Dashboard onLogout={() => setIsAuthenticated(false)} />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="profile" element={<Profile />} />
-          <Route path="setting" element={<Setting />} />
-        </Route>
-      </Routes>
+      {/* Seluruh pengaturan rute dipisahkan ke modul AppRoutes */}
+      <AppRoutes
+        isAuthenticated={isAuthenticated}
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
+        user={user}
+        setUser={setUser}
+        hobi={hobi}
+        hobiTerpilih={hobiTerpilih}
+        setHobiTerpilih={setHobiTerpilih}
+        hobiAktif={hobiAktif}
+        nama={nama}
+        setNama={setNama}
+      />
     </>
   );
 }

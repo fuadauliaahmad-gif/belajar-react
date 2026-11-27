@@ -551,7 +551,7 @@
 }
 
 /* =========================================
-   Layout & Halaman Styling (Home, About, Contact)
+    Layout & Halaman Styling (Home, About, Contact)
    ========================================= */
 
 .halaman-wrapper {
@@ -613,6 +613,7 @@
 .highlight-teks {
   color: #ef4444;
   background: linear-gradient(135deg, #ef4444, #f87171);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -1011,4 +1012,197 @@
     padding-top: 90px;
   }
 }
+
+/* =========================================
+   Navbar Auth & Logout Button Styling
+   ========================================= */
+
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-user-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 13px;
+  color: #f1f5f9;
+  font-weight: 500;
+}
+
+.tombol-navbar-logout {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tombol-navbar-logout:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+
+.tombol-navbar-login {
+  display: inline-flex;
+  align-items: center;
+  background-color: #dc2626;
+  color: white !important;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tombol-navbar-login:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.tombol-navbar-login.aktif {
+  background-color: #dc2626;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+}
+
+/* =========================================
+   Dashboard Stats, Tabs & Pintasan Styling
+   ========================================= */
+
+.tab-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.tab-nav-btn:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-nav-btn.aktif {
+  color: white;
+  background-color: #dc2626;
+  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.35);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.stat-ikon {
+  font-size: 30px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #282828;
+  border: 1px solid #383838;
+  border-radius: 12px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.stat-nilai {
+  margin: 0 0 4px;
+  font-size: 18px;
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+.stat-link {
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.stat-link:hover {
+  color: #f87171;
+  text-decoration: underline;
+}
+
+.pintasan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.kartu-pintasan {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: #181818;
+  border: 1px solid #2e2e2e;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.kartu-pintasan:hover {
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  background: #1f1f1f;
+}
+
+.pintasan-ikon {
+  font-size: 24px;
+  margin-top: 2px;
+}
+
+.kartu-pintasan h4 {
+  margin: 0 0 4px;
+  color: #f8fafc;
+  font-size: 15px;
+}
+
+.kartu-pintasan p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Alert Error */
+.alert-error {
+  padding: 12px 16px;
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 
